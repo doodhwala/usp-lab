@@ -1,0 +1,11 @@
+1.
+	On fork, the alarm signal is sent to the same pid that called it (the parent)
+	On exec, the pid remains the same and hence the alarm signal is received after exec.
+		The disposition is not carried forward to the execed process.
+
+2.
+	No key observations.
+	(Default action is to stop the program's execution if it was sleeping)
+
+3.
+	Unless we set O_CLOEXEC flag while opening or FD_CLOEXEC flag through fcntl, the file descriptors remain open across exec.

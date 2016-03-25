@@ -1,0 +1,10 @@
+//static linking
+gcc -c mylib.c
+ar rcs libmy.a mylib.o
+gcc -o output client_mylib.c -lmy -L.
+
+//dynamic linking
+gcc -fPIC -c mylib.c
+gcc -shared -o libmy.so mylib.o
+gcc -o output client_mylib.c libmy.so
+export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH

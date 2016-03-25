@@ -1,0 +1,18 @@
+1.
+	Implement client - server communication using pipes.
+	Client sends a string
+	Server makes the first char uppercase and sends it back
+	Hint: require two pipes
+
+2.
+	Create a message queue with the following message structure.
+		char cmd[5];
+		int val;
+	cmd takes strings sqr or cube.
+	Server receives the messages into input msg queue from multiple clients.
+	Based on the cmd, server squares or cubes the value in val and sends the message through an output msg queue.
+	Each client should receive his message.
+
+	What happens if the message queue is removed
+	   a)   when the queue contains # of messages
+	   b)   when the client is waiting to read a message

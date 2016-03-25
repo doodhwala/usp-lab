@@ -1,0 +1,9 @@
+Write a program which takes a command with arguments from the command line and executes it.
+./mypgm ls -l -i
+This should execute the ls cmd.
+Hint : - Experiment with execvp call
+
+Experiment with environment variable. Create an environment variable. Fork and check whether the variable is available in both the parent and the child. Change in the child and check whether the variable has changed in the parent. Now change in the parent and check whether the variable has changed in the child. Note down observations.
+
+Demonstrate creation of orphan and zombie process. 
+Use ps command and observe the output.

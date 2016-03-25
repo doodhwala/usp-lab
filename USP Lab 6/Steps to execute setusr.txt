@@ -1,0 +1,37 @@
+Steps:
+
+Create two users who belong to two different groups.
+
+user1:
+
+Create file test.dat, write few lines (from command prompt)
+user1 is owner of file test.dat permissions rw-rw-r
+
+Compile file setusr.c
+Executable file created : a.out
+
+./a.out
+On execution, user1 appends "hello" to file contents.
+
+Switch user (user2)
+
+sudo su user2
+Navigate to directory where setusr.c and test.dat is present.
+
+Execute a.out
+./a.out
+open:Permission denied
+(Because user2 doesn't have permission to write to file test.dat)
+
+Now switch back to user1
+su user1
+Set set uid bit for executable file a.out
+(Any user who executes a.out will get temporary permissions of user1 on files opened)
+chmod u+s a.out
+
+Switch to user2
+
+sudo su user2
+Now execute a.out
+./a.out
+No error. User2 can append to file test.dat, because it will have temporary permissions of user1 on test.dat

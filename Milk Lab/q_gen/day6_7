@@ -1,0 +1,25 @@
+1. experiment:
+	a) write the string "I am a fool" to the file descriptor 1
+	b) write the string "I am a fool" to the file descriptor 0
+	c) read into a char array the string stupid from the file descriptor 0
+	d) read into a char array the string stupid from the file descriptor 1
+	e) seek to the offset 10000 from the beginning file on the file descriptor 1
+
+2. A directory has # of text files. 
+   a) Combine all of them to create a single file. (like the tar utility)
+   b) break the combined files back to the constituent files. (like the untar utility)
+
+3. Experiment with set user bit.
+   Create two users(same rama and krishna).
+   rama creates a file junk.txt with permissions rw-------.
+   rama creates an executable program to append the string "adding a line" to the file junk.txt.
+   Let krishna login and check whether he can append.
+   rama changes the permission on the executable program and adds set user bit.
+   Let krishna try again. check what happens to the file junk.txt.
+
+4. Open a file for reading in a program. As the program is still executing, move the file
+   to a different name and/or different directory in the same file system. Can you read the 
+   file further in the program? Experiment and check.
+
+5. Open a file for reading in a program. Remove the file from the directory. Confirm that 
+   the filename no more exists using ls command. Can you read the file further in the program?

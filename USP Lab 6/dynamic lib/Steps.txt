@@ -1,0 +1,14 @@
+>> gcc -fPIC -c mylib.c
+>> gcc -shared -o libmylibrary.so mylib.o
+>> gcc client_mylib.c libmylibrary.so 
+>> ./a.out
+./a.out: error while loading shared libraries: libmylibrary.so: cannot open shared object file: No such file or directory
+>> export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+>> 
+>> gcc client_mylib.c libmylibrary.so 
+>> ./a.out
+a + b = 3
+a - b = -1
+a * b = 2
+>> 
+

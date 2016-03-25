@@ -1,0 +1,4 @@
+whats up in life? : Success
+fd2: 1 
+fd3: 2 
+hello, how are you

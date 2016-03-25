@@ -1,0 +1,36 @@
+1
+	Find the output of this program.
+	How many processes are created in the following code snippet? Show steps in detail.
+
+	int main()
+	{
+		fork();
+		fork() && fork() || fork();
+		fork();
+		printf(“test\n”);
+		return 0;
+	}
+
+2
+	What happens in this program if you are running the program in the following ways?
+
+	#include <stdio.h>
+	#include <unistd.h>
+	#include <stdlib.h>
+
+	int main()
+	{
+		printf(“abcd\n”);
+		fork(); 
+		printf(“pqrs\n”);
+		return 0;
+	}
+
+	a. Run the program as it is
+	b. Remove the new line in the first printf and try it
+	c. Re-introduce the new line in the first printf and run the program as
+		./pgm > out
+	Check what is stored in the file out 
+
+3
+	Write a program in which the parent displays uppercase characters A-Z and child displays lowercase characters a-z with a delay of max of 2 seconds (try randomizing the delay) between each character. Run the program repeatedly and see if there is racing.

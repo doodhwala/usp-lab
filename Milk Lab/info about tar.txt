@@ -1,0 +1,40 @@
+UStar format
+
+Most modern tar programs read and write archives in the UStar (Uniform Standard Tape ARchive) format, introduced by the POSIX IEEE P1003.1 standard from 1988. It introduced additional header fields. Older tar programs will ignore the extra information, while newer programs will test for the presence of the "ustar" string to determine if the new format is in use. The UStar format allows for longer file names and stores additional information about each file.
+Field Offset 	Field Size 	Field
+0 	156 	(as in old format)
+156 	1 	Type flag
+157 	100 	(as in old format)
+257 	6 	UStar indicator "ustar"
+263 	2 	UStar version "00"
+265 	32 	Owner user name
+297 	32 	Owner group name
+329 	8 	Device major number
+337 	8 	Device minor number
+345 	155 	Filename prefix
+
+The Type flag field can have the following values:
+Type flag field Value 	Meaning
+'0' or (ASCII NUL) 	Normal file
+'1' 	Hard link
+'2' 	Symbolic link
+'3' 	Character special
+'4' 	Block special
+'5' 	Directory
+'6' 	FIFO
+'7' 	Contiguous file
+'g' 	global extended header with meta data (POSIX.1-2001)
+'x' 	extended header with meta data for the next file in the archive (POSIX.1-2001)
+'A'–'Z' 	Vendor specific extensions (POSIX.1-1988)
+All other values 	reserved for future standardization
+
+---------------------------------------------------------------------------------------------------------
+
+
+Magic number
+
+One way to incorporate file type metadata, often associated with Unix and its derivatives, is just to store a "magic number" inside the file itself. Originally, this term was used for a specific set of 2-byte identifiers at the beginning of a file, but since any binary sequence can be regarded as a number, any feature of a file format which uniquely distinguishes it can be used for identification. GIF images, for instance, always begin with the ASCII representation of either GIF87a or GIF89a, depending upon the standard to which they adhere. Many file types, especially plain-text files, are harder to spot by this method. HTML files, for example, might begin with the string <html> (which is not case sensitive), or an appropriate document type definition that starts with <!DOCTYPE HTML>, or, for XHTML, the XML identifier, which begins with <?xml. The files can also begin with HTML comments, random text, or several empty lines, but still be usable HTML.
+
+The magic number approach offers better guarantees that the format will be identified correctly, and can often determine more precise information about the file. Since reasonably reliable "magic number" tests can be fairly complex, and each file must effectively be tested against every possibility in the magic database, this approach is relatively inefficient, especially for displaying large lists of files (in contrast, file name and metadata-based methods need check only one piece of data, and match it against a sorted index). Also, data must be read from the file itself, increasing latency as opposed to metadata stored in the directory. Where file types don't lend themselves to recognition in this way, the system must fall back to metadata. It is, however, the best way for a program to check if the file it has been told to process is of the correct format: while the file's name or metadata may be altered independently of its content, failing a well-designed magic number test is a pretty sure sign that the file is either corrupt or of the wrong type. On the other hand, a valid magic number does not guarantee that the file is not corrupt or is of a correct type.
+
+So-called shebang lines in script files are a special case of magic numbers. Here, the magic number is human-readable text that identifies a specific command interpreter and options to be passed to the command interpreter.

@@ -1,0 +1,69 @@
+sudo groupadd ~groupname~
+sudo useradd -g groupname -m[must have home directory] ~username~
+sudo passwd ~username~
+
+test.dat (-rw-rw-r--)
+
+FINISH CODING + TESTING
+
+sudo su username
+
+Go to /home/student/
+Don't recompile the file and try executing the program
+
+Won't be allowed to open in append mode.
+
+Go back to student user
+Change a.out to give setuid permission
+	chmod u+s a.out
+
+Switch to user2
+Execute a.out and see what happens (assumes permissions of the owner)
+
+
+-----------------------------------
+
+Output:
+------
+
+Student Terminal
+
+>> gcc 3.c -o withoutSetUserBit.out
+>> gcc 3.c -o withSetUserBit.out
+>> ls with*
+withoutSetUserBit.out  withSetUserBit.out
+>> ls -l with*
+-rwxrwxr-x 1 student student 7483 Feb 23 14:23 withoutSetUserBit.out
+-rwxrwxr-x 1 student student 7483 Feb 23 14:23 withSetUserBit.out
+>> chmod u+s withSetUserBit.out 
+>> ls -l with*
+-rwxrwxr-x 1 student student 7483 Feb 23 14:23 withoutSetUserBit.out
+-rwsrwxr-x 1 student student 7483 Feb 23 14:23 withSetUserBit.out
+>> 
+
+Outsider Terminal
+
+>> sudo groupadd cows
+[sudo] password for student: 
+>> sudo useradd -g cows -m cow1
+>> sudo passwd cow1
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+>> sudo useradd -g cows -m cow2
+>> sudo passwd cow2
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+>> sudo su cow1
+cow1@pesu-DL-H61-X1:/home/student/Desktop/doodhwala$ ./withoutSetUserBit.out 
+fd = -1
+Open failed: Permission denied
+cow1@pesu-DL-H61-X1:/home/student/Desktop/doodhwala$ 
+cow1@pesu-DL-H61-X1:/home/student/Desktop/doodhwala$ 
+cow1@pesu-DL-H61-X1:/home/student/Desktop/doodhwala$ ./withSetUserBit.out 
+fd = 3
+Successfully opened and wrote into the file
+Closed file and end of program
+
+cow1@pesu-DL-H61-X1:/home/student/Desktop/doodhwala$ exit

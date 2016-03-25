@@ -1,0 +1,8 @@
+type
+which
+chmod +x -x
+
+fcntl
+exec variations
+
+create file without giving user permissions

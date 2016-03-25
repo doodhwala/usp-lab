@@ -1,0 +1,88 @@
+Doubts:
+
+Read about ar, rcs
+
+	The GNU ar program creates, modifies, and extracts from archives.  An archive is a single file holding a collection of other files in
+   a structure that makes it possible to retrieve the original individual files (called members of the archive).
+
+   The original files' contents, mode (permissions), timestamp, owner, and group are preserved in the archive, and can be restored on
+       extraction.
+
+
+
+       r   Insert the files member... into archive (with replacement). This operation differs from q in that any previously existing members
+           are deleted if their names match those being added.
+
+           If one of the files named in member... does not exist, ar displays an error message, and leaves undisturbed any existing members
+           of the archive matching that name.
+
+       c   Create the archive.  The specified archive is always created if it did not exist, when you request an update.  But a warning is
+           issued unless you specify in advance that you expect to create it, by using this modifier.
+
+       s   Write an object-file index into the archive, or update an existing one, even if no other change is made to the archive.  You may
+           use this modifier flag either with any operation, or alone.  Running ar s on an archive is equivalent to running ranlib on it.
+
+cvq - create, verbose, quick add
+
+>> nm -s libmylibrary.a 
+
+Archive index:
+add in mylib.o
+sub in mylib.o
+mul in mylib.o
+
+mylib.o:
+0000000000000000 T add
+0000000000000026 T mul
+0000000000000014 T sub
+
+-------------------------------------------------------------------------------------------------------------------
+
+Try out size, nm and ldd
+
+>> size ./static\ lib/a.out 
+   text	   data	    bss	    dec	    hex	filename
+   1492	    560	      8	   2060	    80c	./static lib/a.out
+>> size ./dynamic\ lib/a.out 
+   text	   data	    bss	    dec	    hex	filename
+   1912	    600	      8	   2520	    9d8	./dynamic lib/a.out
+
+Dynamic should have been smaller but due to the inclusion of stubs, the size is higher
+
+nm:
+
+	Static
+	0000000000400563 T add
+
+	Dynamic
+	                 U add
+	
+	Statically linked functions have been defined but for dynamic linkage, the functions are undefined
+	
+		
+ldd - shared library dependencies
+
+>> ldd ./static\ lib/a.out 
+	linux-vdso.so.1 =>  (0x00007ffd7cfd2000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f9630026000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000556b2d32f000)
+>> ldd ./dynamic\ lib/a.out 
+	linux-vdso.so.1 =>  (0x00007ffe581b9000)
+	libmylibrary.so => not found												THIS IS EXTRA
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ff3c2abc000)
+	/lib64/ld-linux-x86-64.so.2 (0x000055ba89728000)
+
+--------------------------------------------------------------------------------------------------------------------
+
+-fPIC, -shared
+
+--------------------------------------------------------------------------------------------------------------------
+
+Read man 1posix chmod
+
+Applications of setUserBit?
+
+
+Security provided by setUserBit?
+
+

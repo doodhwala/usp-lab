@@ -1,0 +1,40 @@
+1. Create the image with static and dynamic linking. Use the command size and note the result?
+   // ex1.c
+   #include <stdio.h>
+   int main()
+   {
+         printf("hello world\n");
+         return 0;
+   }
+   compile using:
+   gcc -o ex1a ex1.c
+   gcc -static -o ex1b ex1.c
+ 
+2. Create static and dynamic libraries. Experiment.
+ (Create three files, mylib.c(define few functions), mylib.h (function declarations), client_mylib.c (call functions defined in mylib.c) )
+
+   //static library
+   gcc -c mylib.c
+   ar rcs libmy.a mylib.o
+   gcc -o output client_mylib.c -lmy -L.
+   
+   //dynamic library
+   gcc -fPIC -c mylib.c
+   gcc -shared -o libmy.so mylib.o
+   gcc -o output client_mylib.c libmy.so
+   export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH  
+
+Experiment with set user bit.
+    Create executable and data file so that others can also access.
+    (For user1)
+     a) Open a file (test.dat) for appending.
+     c) Append to the file
+     d) Close the file
+ 
+Requirement:-
+    a) Remove write permission for others
+    b) Ask user2 to execute the program
+    c) Add set user bit  ( Change permission of program (executable file))
+    d) Ask user2 to execute the program
+
+

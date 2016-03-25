@@ -1,0 +1,11 @@
+>> gcc -c mylib.c
+>> ar rcs libmylibrary.a mylib.o
+>> gcc client_mylib.c -lmylibrary -L.
+-l[lname]
+-L[directory to search]
+>> ./a.out
+a + b = 3
+a - b = -1
+a * b = 2
+>> 
+
